@@ -140,6 +140,16 @@ inductor_skips["cuda"] = {
     # Disabled on migration to core
     "linalg.pinv.singular": {f32, f64},
     "linalg.householder_product": {f32},
+    # These might be passing now?
+    "T": {b8, f16, f32, f64, i32, i64},
+    "H": {b8, f16, f32, f64, i32, i64},
+    "__getitem__": {b8, f16, f32, f64, i32, i64},
+    "acos": {b8, f16, f32, f64, i32, i64},
+    "acosh": {b8, f16, f32, f64, i32, i64},
+    "nn.functional.conv_transpose3d": {f16},
+    # Issues on sm86 periodic job (complex numbers)
+    "cdouble": {b8, f16, f32, f64, i32, i64},
+    "cfloat": {b8, f16, f32, f64, i32, i64},
 }
 
 inductor_expected_failures_single_sample = defaultdict(dict)
@@ -354,7 +364,6 @@ inductor_expected_failures_single_sample["cuda"] = {
     # AssertionError: Tensor-likes are not close!
     "erf": {b8, f64},
     "nn.functional.gelu": {f64},
-    "nn.functional.conv_transpose3d": {f16},
     "nn.functional.triplet_margin_loss": {f16},
 }
 
